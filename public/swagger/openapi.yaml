@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: Auth App
+  version: 1.0.0
+  description: Auth App Services.
+  contact:
+    email: ravisharmacs09@gmail.com
+  license:
+    name: Private
+
+paths:
+  /api/v1/auth/signin:
+    post:
+      summary: Sign in with email and password
+      description: Endpoint to authenticate a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Authentication Successful
+          content:
+            application/json:
+              schema:
+                type: object  # Define your expected response schema
+                properties:
+                  token:
+                    type: string
+                  refreshToken:
+                    type: string
+                  userInfo:
+                   type: object
+                   properties:
+                    userId: 
+                     type: string
+                    userName: 
+                     type: string
+                    firstName:
+                     type: string
+                    lastName:
+                     type: string
+                    email:
+                     type: string
+        '400':
+          description: Authentication Failed
+          content:
+            application/json:
+              schema:
+               type: object  # Define your expected error response
+               properties:
+                  error:
+                    type: string
+  
