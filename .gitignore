@@ -3,6 +3,7 @@ build/
 .env-*
 .env-dev
 .DS_Store
+.vscode
 .log
 *.log
 .npmrc
