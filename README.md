@@ -18,27 +18,37 @@ npm start
 4. To check swagger ui documentaion open below url:
 http://localhost:8000/swagger/openapi
 
-Development:
-If this project is open for contributions, provide instructions on how to set up a development environment and how to contribute to the project.
+## Setup Docker:
+Install docker desktop 
 
-Technologies Used:
+run below command
+docker login
+
+run below command
+docker build -t <docker_profile_username>/auth-app:0.0.1.RELEASE .
+
+run below command
+ docker container run -d -p 3000:8000 <docker_profile_username>/auth-app:0.0.1.RELEASE
+
+To check for any error run below command 
+docker logs <docker_profile_username>/auth-app:0.0.1.RELEASE
+
+To run docker compose file run below command
+docker-compose up --build
+
+Now you will be able to access server on 
+http://localhot:3000
+
+
+## Technologies Used:
 Node.js
 TypeScript
 Express (if applicable)
 Other libraries or tools
 
-License
-Specify the license under which your project is distributed. For example:
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+## License
+Open Source
 
-How to Contribute
-If your project is open for contributions, include a section on how others can contribute to your project, including guidelines for reporting bugs, suggesting features, and submitting pull requests.
-
-Support
-If you offer support or have a community around your project, provide information on how users can get in touch with you or join the community.
-
-Acknowledgements
-If there are any acknowledgements or credits you'd like to give, you can include them here.
-
-Contact Me:
+Hire Me:
 ravisharmacs09@gmail.com
++91-8817147753
