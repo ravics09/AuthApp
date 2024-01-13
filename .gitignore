@@ -7,3 +7,5 @@ build/
 *.log
 .npmrc
 /coverage
+# Ignore Docker context and build files
+.dockerignore
