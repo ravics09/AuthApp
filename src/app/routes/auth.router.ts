@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { AuthService } from '../services/auth.service';
-
+import {signInLimiter} from './../middlewares/rateLimiter';
 const router: Router = Router();
 const authService = new AuthService(); // Instantiate the AuthService
 
@@ -14,7 +14,7 @@ router.post("/signup", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/signin", async (req: Request, res: Response) => {
+router.post("/signin", signInLimiter, async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     const token = await authService.authenticateUser(email, password);
