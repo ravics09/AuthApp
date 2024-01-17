@@ -1,9 +1,8 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 import UserModel, { User } from "../models/user.model";
-
-const authService = {
+import { createAccessToken, createRefreshToken } from "./../utils/tokenUtils";
+export class AuthService {
   async createUser(
     username: string,
     email: string,
@@ -42,12 +41,12 @@ const authService = {
         throw new Error(`An unexpected error occurred ${error}`);
       }
     }
-  },
+  }
 
   async authenticateUser(
     email: string,
     password: string
-  ): Promise<string | null> {
+  ): Promise<{ accessToken: string; refreshToken: string } | null> {
     try {
       // Check if the user exists
       const user = await UserModel.findOne({ email });
@@ -62,18 +61,14 @@ const authService = {
       }
 
       // Create and return a JWT token
-      const token = jwt.sign(
-        { userId: user._id, email: user.email },
-        "your_secret_key",
-        { expiresIn: "1h" }
-      );
+      const accessToken = createAccessToken(user._id, user.email); // return token info
 
-      // return token info
-      return token;
+      // Create and return a refreshToken
+      const refreshToken = createRefreshToken(user._id);
+
+      return { accessToken, refreshToken };
     } catch (error) {
       throw new Error("Could not signin");
     }
-  },
-};
-
-export default authService;
+  }
+}

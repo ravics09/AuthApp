@@ -1,6 +1,8 @@
 import { Router, Request, Response } from "express";
-import authService from '../services/auth.service';
+import { AuthService } from '../services/auth.service';
+
 const router: Router = Router();
+const authService = new AuthService(); // Instantiate the AuthService
 
 router.post("/signup", async (req: Request, res: Response) => {
   try {
