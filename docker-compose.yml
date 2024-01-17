@@ -1,10 +1,39 @@
-version: '3.8'
+version: '3.9'
 services:
-  mongodb:
-    image: mongo
-    container_name: my-mongodb
+  mongo_db:
+    container_name: authapp-mongodb
+    image: mongo:latest
+    restart: always
     ports:
-      - '27017:27017'
+      - 27017:27017 
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_USER: admin
+      MONGO_INITDB_PASSWORD: password
+    networks:
+      - app-network
+
+  nodejs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:8000
+    depends_on:
+      - mongo_db
+    networks:
+      - app-network
+
+  swagger-ui:
+    container_name: my-swagger-ui
+    image: swaggerapi/swagger-ui:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo_db
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge

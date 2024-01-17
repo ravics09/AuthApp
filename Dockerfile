@@ -1,18 +1,16 @@
 #  Dockerfile for Node Express Backend api (development)
 
 # Use an official Node.js runtime as the base image
-FROM node:20
-
-ARG NODE_ENV=development
+FROM node:alpine
 
 # Create App Directory
-RUN mkdir -p /auth-app/src/app
 WORKDIR /auth-app/src/app
+ENV NODE_ENV=development
 
 # Install Dependencies
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 # Copy app source code
 COPY . .
@@ -20,4 +18,4 @@ COPY . .
 # Exports
 EXPOSE 3000
 
-CMD ["npm","start"]
+CMD ["npm","run", "start"]

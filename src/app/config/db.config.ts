@@ -1,30 +1,25 @@
 import dotenv from 'dotenv';
 import { ConnectOptions, connect } from "mongoose";
-
+ 
 dotenv.config({ path: '.env-dev' });
 
-type ConnectionOptionsExtend = {
-  useNewUrlParser: boolean
-  useUnifiedTopology: boolean
-}
-const options: ConnectOptions & ConnectionOptionsExtend = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}
+const connectDB = async () => { 
+  const dbUri: string | undefined = process.env.DB_URI || 'mongodb://admin:password@my-mongodb:27017/authapp';
+  const options : ConnectOptions = {
+    authSource: "admin",
+    user: process.env.DB_USER,
+    pass: process.env.DB_PASS
+  }
 
-const dbUri: string | undefined = process.env.DB_URI
-
-
-const connectDB = async () => { // Replace with your actual MongoDB database URI
   if (!dbUri) {
     throw new Error('DB_URI is not defined in the environment configuration');
   }
 
   try {
     await connect(dbUri, options);
-    console.log('MongoDB connected');
+    console.log('Connected with MongoDB Server');
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
+    throw Error(`Error while connecting with MongoDB Server: ${error}`);
   }
 };
 

@@ -21,23 +21,26 @@ http://localhost:8000/swagger/openapi
 ## Setup Docker:
 Install docker desktop 
 
-run below command
+Login to docker using below command
 docker login
 
-run below command
-docker build -t <docker_profile_username>/auth-app:0.0.1.RELEASE .
 
-run below command
- docker container run -d -p 3000:8000 <docker_profile_username>/auth-app:0.0.1.RELEASE
+To run docker compose file run below command
+docker-compose up --d
 
 To check for any error run below command 
 docker logs <docker_profile_username>/auth-app:0.0.1.RELEASE
 
-To run docker compose file run below command
-docker-compose up --build
 
-Now you will be able to access server on 
+If container is running successfully then you will be able to access server on 
 http://localhot:3000
+http://localhost:3000/swagger/openapi#/
+
+if you are running node server locally using below command 
+npm start
+
+then you can access swagger ui on below url
+http://localhost:8000/swagger/openapi#/
 
 
 ## Technologies Used:
