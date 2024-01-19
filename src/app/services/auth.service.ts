@@ -3,7 +3,19 @@ import bcrypt from "bcrypt";
 import UserModel, { User } from "../models/user.model";
 import { createAccessToken, createRefreshToken } from "./../utils/tokenUtils";
 export class AuthService {
-  async createUser(
+  private static _instance? : AuthService;
+
+  private constructor() {
+  }
+
+  public static getInstance(): AuthService {
+    if(!AuthService._instance) {
+      AuthService._instance = new AuthService();
+    }
+    return AuthService._instance;
+  }
+
+  public async createUser(
     username: string,
     email: string,
     password: string
@@ -43,7 +55,7 @@ export class AuthService {
     }
   }
 
-  async authenticateUser(
+  public async authenticateUser(
     email: string,
     password: string
   ): Promise<{ accessToken: string; refreshToken: string } | null> {

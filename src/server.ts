@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 import * as fs from 'fs';
 import * as yaml from 'yaml';
 import connectDB from './app/config/db.config';
-import AuthRouter from './app/routes/auth.router';
+import {AuthRouter} from './app/routes/auth.router';
 dotenv.config({ path: '.env-dev' });
 
 
@@ -26,7 +26,7 @@ connectDB()
     
       // Serve the OpenAPI specification using Swagger UI
       app.use('/swagger', SwaggerUi.serve, SwaggerUi.setup(swaggerDocument));
-      app.use("/auth", AuthRouter);
+      app.use("/auth", AuthRouter.buildRouter());
     
       // Start the Express server
       app.listen(port, () => {

@@ -11,7 +11,8 @@
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
     "strict": true,                                      /* Enable all strict type-checking options. */
     "strictNullChecks": true,                         /* When type checking, take into account 'null' and 'undefined'. */
-    "skipLibCheck": true                            /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true,                            /* Skip type checking all .d.ts files. */
+    "experimentalDecorators": true
   },
   "include": ["src/**/*.ts", "public/swagger/*.yaml"],
   "exclude": ["node_modules"]
