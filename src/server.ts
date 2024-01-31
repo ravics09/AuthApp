@@ -35,6 +35,7 @@ connectDB()
 
       app.use(notFound);
       app.use(errorHandler);
+      app.use(cookieParser());
 
       // Start the Express server
       app.listen(port, () => {
